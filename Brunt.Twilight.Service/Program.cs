@@ -17,7 +17,7 @@ namespace Brunt.Twilight.Service
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service1()
+                new BruntTwilight()
             };
             ServiceBase.Run(ServicesToRun);
         }

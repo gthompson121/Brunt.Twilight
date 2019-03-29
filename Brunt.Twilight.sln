@@ -5,6 +5,12 @@ VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brunt.Twilight.Service", "Brunt.Twilight.Service\Brunt.Twilight.Service.csproj", "{3076A22C-6EC2-4D7C-9FDA-E308E220BFC8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brunt.Twilight.Sky", "Brunt.Twilight.Sky\Brunt.Twilight.Sky.csproj", "{ECE92291-96C6-408D-BBB0-3B151CCDF9E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brunt.Twilight.API", "Brunt.Twilight.API\Brunt.Twilight.API.csproj", "{325667BE-7DCE-4A2E-A785-206336AA16A6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Brunt.Twilight.Tests", "Brunt.Twilight.Tests\Brunt.Twilight.Tests.csproj", "{E697B6ED-A6CE-4187-ACC4-A1EAB30B272A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +21,18 @@ Global
 		{3076A22C-6EC2-4D7C-9FDA-E308E220BFC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3076A22C-6EC2-4D7C-9FDA-E308E220BFC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3076A22C-6EC2-4D7C-9FDA-E308E220BFC8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ECE92291-96C6-408D-BBB0-3B151CCDF9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ECE92291-96C6-408D-BBB0-3B151CCDF9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ECE92291-96C6-408D-BBB0-3B151CCDF9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ECE92291-96C6-408D-BBB0-3B151CCDF9E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325667BE-7DCE-4A2E-A785-206336AA16A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325667BE-7DCE-4A2E-A785-206336AA16A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325667BE-7DCE-4A2E-A785-206336AA16A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325667BE-7DCE-4A2E-A785-206336AA16A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E697B6ED-A6CE-4187-ACC4-A1EAB30B272A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E697B6ED-A6CE-4187-ACC4-A1EAB30B272A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E697B6ED-A6CE-4187-ACC4-A1EAB30B272A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E697B6ED-A6CE-4187-ACC4-A1EAB30B272A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
