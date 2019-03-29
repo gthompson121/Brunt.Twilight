@@ -35,8 +35,8 @@ namespace Brunt.Twilight.Tests
             new object[] { new DateTime(2019,03,29,4,0,0), new DateTime(2019, 03, 29, 6, 0, 0), new DateTime(2019,03,29,19,0,0), false },
             new object[] { new DateTime(2019,03,29,11,0,0), new DateTime(2019, 03, 29, 6, 0, 0), new DateTime(2019,03,29,19,0,0), true },
             new object[] { new DateTime(2019,03,29,14,0,0), new DateTime(2019, 03, 29, 6, 0, 0), new DateTime(2019,03,29,19,0,0), true },
-            new object[] { new DateTime(2019,03,29,19,0,0), new DateTime(2019, 03, 29, 6, 0, 0), new DateTime(2019,03,29,19,0,0), false },
-            new object[] { new DateTime(2019,03,29,22,0,0), new DateTime(2019, 03, 29, 6, 0, 0), new DateTime(2019,03,29,19,0,0), false },
+            new object[] { new DateTime(2019,03,29,19,0,0), new DateTime(2019, 03, 30, 6, 0, 0), new DateTime(2019,03,30,19,0,0), false },
+            new object[] { new DateTime(2019,03,29,22,0,0), new DateTime(2019, 03, 30, 6, 0, 0), new DateTime(2019,03,30,19,0,0), false },
         };
 
         [Theory, MemberData(nameof(dataList))]

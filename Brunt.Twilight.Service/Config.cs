@@ -16,5 +16,7 @@ namespace Brunt.Twilight.Service
         public double Lat { get; set; }
         public double lng { get; set; }
         public string TwilightUri { get; set; }
+        public string SunrisePosition { get; set; }
+        public string SunsetPosition { get; set; }
     }
 }

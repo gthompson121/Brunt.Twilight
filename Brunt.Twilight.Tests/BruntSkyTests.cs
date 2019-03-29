@@ -44,7 +44,7 @@ namespace Brunt.Twilight.Tests
             Assert.True(devices.Length == 2);
         }
 
-        [Fact]
+        [Fact(Skip = "Don't want to change blind setting.")]
         public async Task SetDevicePosition()
         {
             await Login();

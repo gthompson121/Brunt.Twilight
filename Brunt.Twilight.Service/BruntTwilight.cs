@@ -60,7 +60,7 @@ namespace Brunt.Twilight.Service
                     new BruntDevicePositionChange()
                     {
                         DeviceName = d.thingUri,
-                        requestPosition = isSunset ? "111" : "50"
+                        requestPosition = isSunset ? config.SunsetPosition : config.SunrisePosition
                     });
             }
 
