@@ -53,15 +53,34 @@ namespace Brunt.Twilight.Service
             // Set BruntPosition
             var bruntClient = new BruntClient();
             var login = bruntClient.Login(new BruntLoginCredz() { ID = config.ID, PASS = config.PASS }).Result;
-            var devices = bruntClient.GetDevices().Result;
-            foreach(var d in devices)
+            if (login == null)
             {
+                eventLog.WriteEntry("Login failed!", EventLogEntryType.Error, eventId++);
+                return;
+            }
+            var devices = bruntClient.GetDevices().Result;
+            if (devices == null)
+            {
+                eventLog.WriteEntry("Error getting devices!", EventLogEntryType.Error, eventId++);
+                return;
+            }
+            foreach (var d in devices.Where(d=> config.Devices.Select(cd=>cd.Name.ToLower().Trim()).Contains(d.NAME.ToLower().Trim())))
+            {
+                var deviceConfig = config.Devices.SingleOrDefault(dc => dc.Name.ToLower().Trim() == d.NAME.ToLower().Trim());
                 var changed = bruntClient.SetDevicePosition(
                     new BruntDevicePositionChange()
                     {
                         DeviceName = d.thingUri,
-                        requestPosition = isSunset ? config.SunsetPosition : config.SunrisePosition
+                        requestPosition = isSunset ? deviceConfig.SunsetPosition : deviceConfig.SunrisePosition
                     }).Result;
+
+                if(changed == null)
+                {
+                    eventLog.WriteEntry("Error updating device position!", EventLogEntryType.Error, eventId++);
+                    return;
+                }
+                else
+                    eventLog.WriteEntry($"Changed {d.NAME} position to {(isSunset ? "sunset" : "sunrise")}", EventLogEntryType.Information, eventId++);
             }
 
             var twilightClient = GetSSClient();

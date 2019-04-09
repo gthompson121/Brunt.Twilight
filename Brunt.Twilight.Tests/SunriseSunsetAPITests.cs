@@ -12,7 +12,7 @@ namespace Brunt.Twilight.Tests
         double lat = 55.9533;
         double lng = 3.1883;
         DateTime date = DateTime.Parse("2020-01-01");
-        string uri = "https://api.sunrise-sunset.org/json?lat={0}&lng={1}&date={2}";
+        string uri = "https://api.sunrise-sunset.org/json?lat={0}&lng={1}&date={2}&formatted=0";
 
         public SunriseSunsetAPITests()
         {
@@ -25,8 +25,8 @@ namespace Brunt.Twilight.Tests
             var twilight = await client.GetSunriseSunsetForDate();
 
             Assert.NotNull(twilight);
-            Assert.True(twilight.sunrise == DateTime.Parse("3/29/2019 8:17:53 AM"));
-            Assert.True(twilight.sunset == DateTime.Parse("3/29/2019 3:23:43 PM"));
+            Assert.True(twilight.sunrise == DateTime.Parse("1/1/2020 8:17:53 AM"));
+            Assert.True(twilight.sunset == DateTime.Parse("1/1/2020 3:23:43 PM"));
         }
 
         public static object[][] dataList =

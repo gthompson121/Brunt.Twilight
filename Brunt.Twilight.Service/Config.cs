@@ -18,5 +18,13 @@ namespace Brunt.Twilight.Service
         public string TwilightUri { get; set; }
         public string SunrisePosition { get; set; }
         public string SunsetPosition { get; set; }
+        public List<Device> Devices { get; set; }
+    }
+
+    public class Device
+    {
+        public string Name { get; set; }
+        public string SunrisePosition { get; set; }
+        public string SunsetPosition { get; set; }
     }
 }

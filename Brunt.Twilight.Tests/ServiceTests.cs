@@ -8,14 +8,14 @@ namespace Brunt.Twilight.Tests
 {
     public class ServiceTests
     {
-        [Fact(Skip = "Just for debugging")]
+        [Fact]
         public void OnStartTest()
         {
             var service = new BruntTwilight();
             service.Start();
         }
 
-        [Fact(Skip = "Just for debugging")]
+        [Fact]
         public void OnTimerTest()
         {
             var service = new BruntTwilight();
