@@ -14,5 +14,12 @@ namespace Brunt.Twilight.Tests
             var service = new BruntTwilight();
             service.Start();
         }
+
+        [Fact(Skip = "Just for debugging")]
+        public void OnTimerTest()
+        {
+            var service = new BruntTwilight();
+            service.OnTimer(null, null, true);
+        }
     }
 }

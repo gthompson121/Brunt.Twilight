@@ -37,7 +37,6 @@ namespace Brunt.Twilight.Service
         EventLog eventLog;
         private int eventId = 1;
         private DateTime today;
-        private bool isSunset;
         private Timer timer = new Timer();
 
         protected override void OnStart(string[] args)
@@ -45,10 +44,11 @@ namespace Brunt.Twilight.Service
             Start();
         }
 
-        public void OnTimer(object sender, ElapsedEventArgs args)
+        public void OnTimer(object sender, ElapsedEventArgs args, bool isSunset)
         {
             eventLog.WriteEntry("Twilight!", EventLogEntryType.Information, eventId++);
             timer.Stop();
+            timer.Elapsed -= (send, e) => this.OnTimer(send, e, isSunset);
 
             // Set BruntPosition
             var bruntClient = new BruntClient();
@@ -61,20 +61,18 @@ namespace Brunt.Twilight.Service
                     {
                         DeviceName = d.thingUri,
                         requestPosition = isSunset ? config.SunsetPosition : config.SunrisePosition
-                    });
+                    }).Result;
             }
 
             var twilightClient = GetSSClient();
-
             var twilightInfo = twilightClient.GetSunriseSunsetForDate().Result;
-
             var interval = twilightClient.GetIntervalTillNextTwilight(twilightInfo, today);
-            isSunset = interval.Item2;
+
+            eventLog.WriteEntry($"{(isSunset ? "Sunset" : "Sunrise")} Twilight in {interval.Item1} milliseconds.", EventLogEntryType.Information, eventId++);
 
             timer.Interval = interval.Item1;
+            timer.Elapsed += (send, e) => this.OnTimer(send, e, interval.Item2);
             timer.Start();
-
-            eventLog.WriteEntry($"{(interval.Item2 ? "Sunset" : "Sunrise")} Twilight in {interval.Item1} milliseconds.");
         }
 
         public void Start()
@@ -86,12 +84,11 @@ namespace Brunt.Twilight.Service
             SetServiceStatus(this.ServiceHandle, ref serviceStatus);
 
             var interval = GetNextTwilight();
-            isSunset = interval.Item2;
-            eventLog.WriteEntry($"{(interval.Item2 ? "Sunset" : "Sunrise")} Twilight in {interval.Item1} milliseconds.");
+            eventLog.WriteEntry($"{(interval.Item2 ? "Sunset" : "Sunrise")} Twilight in {interval.Item1} milliseconds.", EventLogEntryType.Information, eventId++);
 
             Timer timer = new Timer();
             timer.Interval = interval.Item1;
-            timer.Elapsed += new ElapsedEventHandler(this.OnTimer);
+            timer.Elapsed += (sender,e) => this.OnTimer(sender, e, interval.Item2);
             timer.Start();
 
             // Update the service state to Running.

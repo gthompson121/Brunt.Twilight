@@ -1,7 +1,11 @@
-﻿using Brunt.Twilight.Sky;
+﻿using Brunt.Twilight.Service;
+using Brunt.Twilight.Sky;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -11,10 +15,12 @@ namespace Brunt.Twilight.Tests
     public class BruntSkyTest
     {
         BruntClient bruntClient;
+        Config config;
 
         public BruntSkyTest()
         {
             bruntClient = new BruntClient();
+            config = JsonConvert.DeserializeObject<Config>(File.ReadAllText(AssemblyDirectory + "\\appsettings.json"));
         }
 
         [Fact]
@@ -22,8 +28,8 @@ namespace Brunt.Twilight.Tests
         {
             BruntLoginCredz loginCredz = new BruntLoginCredz()
             {
-                ID = "gthompson121@gmail.com",
-                PASS = "Chubby17*"
+                ID = config.ID,
+                PASS = config.PASS
             };
 
             var loginInfo = await bruntClient.Login(loginCredz);
@@ -55,7 +61,7 @@ namespace Brunt.Twilight.Tests
             BruntDevicePositionChange bdpc = new BruntDevicePositionChange()
             {
                 DeviceName = livingRoom.thingUri,
-                requestPosition = int.Parse(livingRoom.requestPosition) > 100 ? "50" : "100"
+                requestPosition = int.Parse(livingRoom.requestPosition) > 100 ? config.SunrisePosition : config.SunsetPosition
             };
 
             var devicePositionChange = await bruntClient.SetDevicePosition(bdpc);
@@ -64,6 +70,17 @@ namespace Brunt.Twilight.Tests
             Assert.True(devicePositionChange);
 
             await Task.Delay(new TimeSpan(0, 0, 30));
+        }
+
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                UriBuilder uri = new UriBuilder(codeBase);
+                string path = Uri.UnescapeDataString(uri.Path);
+                return Path.GetDirectoryName(path);
+            }
         }
     }
 }
