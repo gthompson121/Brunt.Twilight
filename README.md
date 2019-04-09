@@ -18,10 +18,20 @@ Project configuration is saved in the appsettings.json file:
   "Lng": "-3.188267",
   // Uri of the sunrise/sunset API
   "TwilightUri": "https://api.sunrise-sunset.org/json?lat={0}&lng={1}&date={2}&formatted=0",
-  // Position of the blind for sunrise
-  "SunrisePosition": "55",
-  // Position of the blind for sunset
-  "SunsetPosition": "111"
+  // List of Brunt Engine Devices to adjust
+  "Devices": [
+    {
+	  // Device Name
+      "Name": "{DEVICE NAME}",
+	  // Position of the blind for sunrise
+      "SunrisePosition": "0",
+	  // Position of the blind for sunset
+      "SunsetPosition": "100"
+    },
+    {
+	   ...
+    }
+  ]
 }
 ```
 
